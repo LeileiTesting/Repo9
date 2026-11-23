@@ -2,10 +2,10 @@
 # Trigger manually from GitHub UI: Actions > Deploy to Joule Studio > Run workflow
 #
 # Required organization secrets (Settings > Secrets and variables > Actions > Secrets):
-#   SCI_TENANT_URL     - Issuer URI of the SAP Cloud Identity Services tenant
-#   SCI_CLIENT_ID      - Client ID of the SCI application
-#   JOULE_STUDIO_URL   - Base URL of the Joule Studio solution handling API
-#   SCI_CLIENT_SECRET  - Client secret of the SCI application
+#   TEST_SCI_TENANT_URL     - Issuer URI of the SAP Cloud Identity Services tenant
+#   TEST_SCI_CLIENT_ID      - Client ID of the SCI application
+#   TEST_JOULE_STUDIO_URL   - Base URL of the Joule Studio solution handling API
+#   TEST_SCI_CLIENT_SECRET  - Client secret of the SCI application
 #
 # Optional variables (Settings > Secrets and variables > Actions > Variables):
 #   TARGET_SYSTEMS     - JSON object mapping system type to system ID for multi-system landscapes.
@@ -38,9 +38,9 @@ jobs:
         id: fetch-token
         uses: ./.github/actions/token-fetch
         with:
-          sciTenantUrl: ${{ secrets.SCI_TENANT_URL }}
-          sciClientId: ${{ secrets.SCI_CLIENT_ID }}
-          sciClientSecret: ${{ secrets.SCI_CLIENT_SECRET }}
+          sciTenantUrl: ${{ secrets.TEST_SCI_TENANT_URL }}
+          sciClientId: ${{ secrets.TEST_SCI_CLIENT_ID }}
+          sciClientSecret: ${{ secrets.TEST_SCI_CLIENT_SECRET }}
 
       - name: Build solution
         uses: ./.github/actions/build
@@ -49,5 +49,5 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           sciToken: ${{ steps.fetch-token.outputs.sciToken }}
-          jouleStudioUrl: ${{ secrets.JOULE_STUDIO_URL }}
+          jouleStudioUrl: ${{ secrets.TEST_JOULE_STUDIO_URL }}
           targetSystems: ${{ vars.TARGET_SYSTEMS }}
