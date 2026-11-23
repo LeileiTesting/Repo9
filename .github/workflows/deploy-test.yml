@@ -16,7 +16,7 @@
 #   3. Grant this repository access to each organization secret
 #   4. Complete the SCI client credentials configuration described in SETUP.md
 
-name: Deploy to Test Joule Studio
+name: Deploy to Joule Studio Test Tenant
 
 on:
   workflow_dispatch:  # manual trigger only
